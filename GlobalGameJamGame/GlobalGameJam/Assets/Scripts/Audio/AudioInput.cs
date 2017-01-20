@@ -12,7 +12,7 @@ public class AudioInput : MonoBehaviour {
 
     AudioSource src;
 
-    public static FFT Instance;
+    //public static FFT Instance;
 
     private float lastVolume = 0.0f;
 
@@ -88,7 +88,7 @@ public class AudioInput : MonoBehaviour {
         {
             
             src.Play();
-            src.GetSpectrumData()
+			//src.GetSpectrumData();
         }
     }
 
