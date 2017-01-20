@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<None Include="..\..\GlobalGameJamGame.uproject" />
+		<Filter Include="Source">
+			<UniqueIdentifier>{92074EE7-8DEC-4F49-ABD9-A9AE654469F0}</UniqueIdentifier>
+		</Filter>
+		<None Include="..\..\Source\GlobalGameJamGame.Target.cs">
+			<Filter>Source</Filter>
+		</None >
+		<None Include="..\..\Source\GlobalGameJamGameEditor.Target.cs">
+			<Filter>Source</Filter>
+		</None >
+		<Filter Include="Config">
+			<UniqueIdentifier>{26985C6B-9EA3-49D3-92C5-CCFDAB313E9A}</UniqueIdentifier>
+		</Filter>
+		<None Include="..\..\Config\DefaultEditor.ini">
+			<Filter>Config</Filter>
+		</None >
+		<None Include="..\..\Config\DefaultEngine.ini">
+			<Filter>Config</Filter>
+		</None >
+		<None Include="..\..\Config\DefaultGame.ini">
+			<Filter>Config</Filter>
+		</None >
+		<Filter Include="Source\GlobalGameJamGame">
+			<UniqueIdentifier>{F30B710E-23DA-492B-8325-665C1C1A477B}</UniqueIdentifier>
+		</Filter>
+		<None Include="..\..\Source\GlobalGameJamGame\GlobalGameJamGame.Build.cs">
+			<Filter>Source\GlobalGameJamGame</Filter>
+		</None >
+		<ClCompile Include="..\..\Source\GlobalGameJamGame\GlobalGameJamGame.cpp">
+			<Filter>Source\GlobalGameJamGame</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\GlobalGameJamGame\GlobalGameJamGame.h">
+			<Filter>Source\GlobalGameJamGame</Filter>
+		</ClInclude >
+		<ClCompile Include="..\..\Source\GlobalGameJamGame\GlobalGameJamGameGameModeBase.cpp">
+			<Filter>Source\GlobalGameJamGame</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\GlobalGameJamGame\GlobalGameJamGameGameModeBase.h">
+			<Filter>Source\GlobalGameJamGame</Filter>
+		</ClInclude >
+	</ItemGroup>
+</Project>

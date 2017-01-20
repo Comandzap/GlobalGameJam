@@ -1,0 +1,3 @@
+D:\GlobalGameJam\GlobalGameJamGame\Source\GlobalGameJamGame\GlobalGameJamGame.Build.cs
+D:\GlobalGameJam\GlobalGameJamGame\Source\GlobalGameJamGame.Target.cs
+D:\GlobalGameJam\GlobalGameJamGame\Source\GlobalGameJamGameEditor.Target.cs
