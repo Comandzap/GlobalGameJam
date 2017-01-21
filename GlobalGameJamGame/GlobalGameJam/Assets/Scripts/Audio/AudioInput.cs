@@ -41,10 +41,11 @@ class IndexComparer : IComparer<Peak>
 
 public class AudioInput : MonoBehaviour
 {
-    public Dropdown DropdownList;
-	public Image DecibelMeter;
-	public GameObject missile;
+    public Image DecibelMeter;
+    public GameObject missile;
     public bool fireDir;
+
+    public RectTransform PlayerUI;
 
     public float rmsValue;
     public float dbValue;
@@ -54,6 +55,8 @@ public class AudioInput : MonoBehaviour
     public int binSize = 8192; // you can change this up, I originally used 8192 for better resolution, but I stuck with 1024 because it was slow-performing on the phone
     public float refValue = 0.1f;
     public float threshold = 0.01f;
+
+    public GameObject OtherPlayer;
 
 
     private List<Peak> peaks = new List<Peak>();
@@ -76,41 +79,24 @@ public class AudioInput : MonoBehaviour
 
     void Start()
     {
+        foreach(string device in Microphone.devices)
+        {
+            Debug.Log(device);
+        }
+
         samples = new float[qSamples];
         spectrum = new float[binSize];
         samplerate = AudioSettings.outputSampleRate;
 
-        int selectedMic = DropdownList.value;
-        micNum = selectedMic;
-
-        Debug.Log(selectedMic);
-
         // starts the Microphone and attaches it to the AudioSource
-        GetComponent<AudioSource>().clip = Microphone.Start(Microphone.devices[selectedMic], true, 1, samplerate);
+        GetComponent<AudioSource>().clip = Microphone.Start(Microphone.devices[micNum], true, 1, samplerate);
         GetComponent<AudioSource>().loop = true; // Set the AudioClip to loop
-        while (!(Microphone.GetPosition(Microphone.devices[selectedMic]) > 0)) {
-            Debug.Log("This is dumb?!");
+        while (!(Microphone.GetPosition(Microphone.devices[micNum]) > 0)) {
         } // Wait until the recording has started
         GetComponent<AudioSource>().Play();
 
         // Mutes the mixer. You have to expose the Volume element of your mixer for this to work. I named mine "masterVolume".
         masterMixer.SetFloat("masterVolume", -80f);
-
-
-        //GradientColorKey[] gck;
-        //GradientAlphaKey[] gak;
-        //g = new Gradient();
-        //gck = new GradientColorKey[2];
-        //gck[0].color = Color.red;
-        //gck[0].time = 0.0F;
-        //gck[1].color = Color.blue;
-        //gck[1].time = 1.0F;
-        //gak = new GradientAlphaKey[2];
-        //gak[0].alpha = 1.0F;
-        //gak[0].time = 0.0F;
-        //gak[1].alpha = 0.0F;
-        //gak[1].time = 1.0F;
-        //g.SetKeys(gck, gak);
     }
 
     void AnalyzeSound(int channel)
@@ -164,39 +150,55 @@ public class AudioInput : MonoBehaviour
     public float lowestDb = -15.0f;
     public float highestDb = 10.0f;
 
-    float[] Samples = new float[25];
+    float[] Samples_1 = new float[5];
+    float[] Freq_Array1 = new float[5];
     int sampleCounter = 0;
 
     void FixedUpdate()
     {
-        AnalyzeSound();
-        //Debug.Log("RMS: " + rmsValue.ToString("F2") + " (" + dbValue.ToString("F1") + " dB)\n"
-        //      + "Pitch: " + pitchValue.ToString("F0") + " Hz");
-
-        if(sampleCounter > Samples.Length-1)
+        AnalyzeSound(0);
+        if (sampleCounter > Samples_1.Length - 1)
         {
             sampleCounter = 0;
         }
 
-        Samples[sampleCounter++] = dbValue;
+        Freq_Array1[sampleCounter] = pitchValue;
+        Samples_1[sampleCounter++] = dbValue;
 
-        //Mathf.Sin(lowestDb * K) = 0;
-        //lowestDb = 0;
+        Update_Player();
+    }
 
-        //(highestDb + Mathf.Abs(lowestDb)) * k = Mathf.Sqrt(2) / 2;
+    bool projectileCooldown = false;
+
+    float maxTime = 1.0f;
+    float protimer = 0.0f;
+
+    void Update_Player()
+    {
         float K = (Mathf.Sqrt(2) / 2) / (highestDb + Mathf.Abs(lowestDb));
-
-
-        //Debug.Log(Mathf.Sin(GetAverage() * K));
-
-        float Average = GetAverage();
+        float Average = GetAverage(Samples_1);
 
         if (Average < lowestDb)
             Average = lowestDb;
         if (Average > highestDb)
+        {
             Average = highestDb;
+            // Fire a projectile if its not on cooldown
+
+            if(!projectileCooldown)
+            {
+                (Instantiate(missile, this.transform.position + (OtherPlayer.transform.position - OtherPlayer.transform.position).normalized*5, Quaternion.identity) as GameObject).GetComponent<missile>().direction(fireDir, OtherPlayer.transform.position, GetColorTemp());
+                projectileCooldown = true;
+            } else
+            {
+                protimer += Time.fixedDeltaTime;
+            }
+
+            Debug.Log(protimer);
+        }
 
         //highestDb - lowestDb;
+        float DBMax = 0.0f;
         DecibelMeter.fillAmount = (Average + Mathf.Abs(lowestDb)) / (Mathf.Abs(highestDb) + Mathf.Abs(lowestDb));
 
         fireVector = new Vector3(Mathf.Cos(Average * K), Mathf.Sin(Average * K));
@@ -205,10 +207,8 @@ public class AudioInput : MonoBehaviour
 
         if (pitchValue > 0 && pitchValue < 800)
         {
-            Debug.Log(c);
             fireColor = g.Evaluate(c);
-        }
-        else if (pitchValue >= 1000)
+        } else if (pitchValue >= 1000)
         {
             fireColor = g.Evaluate(1.0f);
         }
@@ -216,25 +216,27 @@ public class AudioInput : MonoBehaviour
         {
             fireColor = g.Evaluate(0.0f);
         }
-
-        
     }
 
     void Update()
     {
-        
+        if (protimer >= maxTime)
+        {
+            projectileCooldown = false;
+            protimer = 0.0f;
+        }
     }
 
-    float GetAverage()
+    float GetAverage(float[] Data)
     {
         float sum = 0.0f;
 
-        for(int i = 0; i < Samples.Length; i++)
+        for(int i = 0; i < Data.Length; i++)
         {
-            sum += Samples[i];
+            sum += Data[i];
         }
 
-        return sum / Samples.Length;
+        return sum / Data.Length;
     }
 
     public Vector3 GetDirectionVector()

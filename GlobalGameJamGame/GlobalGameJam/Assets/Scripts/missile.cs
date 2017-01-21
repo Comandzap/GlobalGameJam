@@ -10,41 +10,53 @@ public class missile : MonoBehaviour {
     public SpriteRenderer renderer;
 	float time = 0;
 
+    bool firstTime = true;
+
+    Vector3 target= new Vector3(0, 0, 0);
+
     // Use this for initialization
     void Start ()
 	{
 		body = GetComponent<Rigidbody>();
-        
+
+        this.tag = "Projectile";
     }
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if(right)
-		{
-			body.AddForce(directionVector * 200);
-		}
-		else
-		{
-            directionVector.x *= -1;
-			body.AddForce(directionVector * 200);
-		}
-		
+        // Autotracking!
+        if (target.magnitude > 0)
+        {
+            Vector3 ourPos = transform.position;
+            Vector3 dir = target - ourPos;
+
+            if (firstTime)
+            {
+                firstTime = false;
+
+                transform.position += dir.normalized * 2;
+            }
+
+            dir.Normalize();
+
+            body.AddForce(2000 * dir * Time.deltaTime);
+
+            Debug.Log(target);
+        }
+
 		time += Time.deltaTime;
 		if(time > 2)
 		{
 			Destroy(this.gameObject);
 		}
-
 	}
 
-	public void direction(bool SetRight, Vector3 vector, Color color)
+	public void direction(bool SetRight, Vector3 position,  Color color)
 	{
 		right = SetRight;
-        directionVector = vector;
         renderer = GetComponent<SpriteRenderer>();
+        target = position;
         renderer.color = color;
 	}
-
-
 }

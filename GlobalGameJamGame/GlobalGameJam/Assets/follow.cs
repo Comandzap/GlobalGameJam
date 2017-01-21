@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class follow : MonoBehaviour {
-	
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -13,6 +13,6 @@ public class follow : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		
+
 	}
 }
