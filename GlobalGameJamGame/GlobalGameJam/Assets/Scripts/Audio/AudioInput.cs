@@ -148,7 +148,16 @@ public class AudioInput : MonoBehaviour
             if(pitchValue > 500)
             {
 			//Debug.Log(transform.position.x);
-			(Instantiate(missile, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity) as GameObject).GetComponent<missile>().direction(fireDir);
+			float extralenght;
+				if (fireDir)
+				{
+					extralenght = 2;
+				}
+				else
+				{
+					extralenght = 2;
+				}
+			(Instantiate(missile, new Vector3(transform.position.x + extralenght, transform.position.y, transform.position.z), Quaternion.identity) as GameObject).GetComponent<missile>().direction(fireDir);
 				Debug.Log("Should Fire");
 			} else if(pitchValue < 200 & pitchValue > 0)
             {

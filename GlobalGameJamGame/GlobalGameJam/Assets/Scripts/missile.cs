@@ -6,7 +6,7 @@ public class missile : MonoBehaviour {
 
 	Rigidbody body;
 	bool right;
-
+	float time;
 
 
 	// Use this for initialization
@@ -25,6 +25,12 @@ public class missile : MonoBehaviour {
 		else
 		{
 			body.AddForce(Vector3.left * 200);
+		}
+
+		time += Time.deltaTime;
+		if(time > 2)
+		{
+			Destroy(this);
 		}
 	}
 
