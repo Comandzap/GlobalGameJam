@@ -41,15 +41,15 @@ class IndexComparer : IComparer<Peak>
 
 public class AudioInput : MonoBehaviour
 {
-	public GameObject missile;
-	public bool fireDir;
+    public GameObject missile;
+    public bool fireDir;
 
-	public float rmsValue;
+    public float rmsValue;
     public float dbValue;
     public float pitchValue;
 
     public int qSamples = 1024;
-    public int binSize = 1024; // you can change this up, I originally used 8192 for better resolution, but I stuck with 1024 because it was slow-performing on the phone
+    public int binSize = 8192; // you can change this up, I originally used 8192 for better resolution, but I stuck with 1024 because it was slow-performing on the phone
     public float refValue = 0.1f;
     public float threshold = 0.01f;
 
@@ -72,7 +72,7 @@ public class AudioInput : MonoBehaviour
         samplerate = AudioSettings.outputSampleRate;
 
         // starts the Microphone and attaches it to the AudioSource
-        GetComponent<AudioSource>().clip = Microphone.Start(Microphone.devices[micNum], true, 10, samplerate);
+        GetComponent<AudioSource>().clip = Microphone.Start(Microphone.devices[micNum], true, 1, samplerate);
         GetComponent<AudioSource>().loop = true; // Set the AudioClip to loop
         while (!(Microphone.GetPosition(null) > 0)) { } // Wait until the recording has started
         GetComponent<AudioSource>().Play();
@@ -109,73 +109,84 @@ public class AudioInput : MonoBehaviour
                 }
             }
         }
-        float freqN = 0f;
-        if (peaks.Count > 0)
-        {
-            //peaks.Sort (new IndexComparer ()); // sort indices in ascending order
-            maxV = peaks[0].amplitude;
-            int maxN = peaks[0].index;
-            freqN = maxN; // pass the index to a float variable
-            if (maxN > 0 && maxN < binSize - 1)
-            { // interpolate index using neighbours
-                var dL = spectrum[maxN - 1] / spectrum[maxN];
-                var dR = spectrum[maxN + 1] / spectrum[maxN];
-                freqN += 0.5f * (dR * dR - dL * dL);
-            }
-        }
-        pitchValue = freqN * (samplerate / 2f) / binSize; // convert index to frequency
+        //float freqN = 0f;
+        //if (peaks.Count > 0)
+        //{
+        //    peaks.Sort(new IndexComparer()); // sort indices in ascending order
+        //    maxV = peaks[0].amplitude;
+        //    int maxN = peaks[0].index;
+        //    freqN = maxN; // pass the index to a float variable
+        //    if (maxN > 0 && maxN < binSize - 1)
+        //    { // interpolate index using neighbours
+        //        var dL = spectrum[maxN - 1] / spectrum[maxN];
+        //        var dR = spectrum[maxN + 1] / spectrum[maxN];
+        //        freqN += 0.5f * (dR * dR - dL * dL);
+        //    }
+        //}
+        //pitchValue = freqN * (samplerate / 2f) / binSize; // convert index to frequency
         peaks.Clear();
     }
 
     float timer = 0.1f;
-    float[] freqSamples = new float[5];
-    float[] dbSamples = new float[5];
+
+    public float lowestDb = -15.0f;
+    public float highestDb = 10.0f;
+
+    float[] Samples = new float[10];
     int sampleCounter = 0;
 
     void FixedUpdate()
     {
         AnalyzeSound();
         //Debug.Log("RMS: " + rmsValue.ToString("F2") + " (" + dbValue.ToString("F1") + " dB)\n"
-          //      + "Pitch: " + pitchValue.ToString("F0") + " Hz");
-        //if (sampleCounter > freqSamples.Length - 1)
-        //{
+        //      + "Pitch: " + pitchValue.ToString("F0") + " Hz");
+
+        // 10 Db = 45 grader
+        // -15.0f = -45 grader
+
+        if(sampleCounter > Samples.Length-1)
+        {
             sampleCounter = 0;
+        }
 
-            //int index = 0;
-            //float maxFreq = GetMax(freqSamples, index);
-            //Debug.Log(index);
-
-            if(pitchValue > 500)
-            {
-			//Debug.Log(transform.position.x);
-			(Instantiate(missile, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity) as GameObject).GetComponent<missile>().direction(fireDir);
-				Debug.Log("Should Fire");
-			} else if(pitchValue < 200 & pitchValue > 0)
-            {
-                Debug.Log("Should Jump");
-            }
-        //}
-        
+        Samples[sampleCounter++] = dbValue;
     }
 
     void Update()
     {
+        //Mathf.Sin(lowestDb * K) = 0;
+        //lowestDb = 0;
 
+        //(highestDb + Mathf.Abs(lowestDb)) * k = Mathf.Sqrt(2) / 2;
+        float K = (Mathf.Sqrt(2) / 2) / (highestDb + Mathf.Abs(highestDb));
+
+
+        Debug.Log(Mathf.Sin(GetAverage() * K));
+
+        float Average = GetAverage();
+
+        if (Average < lowestDb)
+            Average = lowestDb;
+        if (Average > highestDb)
+            Average = highestDb;
+
+        Debug.DrawLine(this.GetComponent<Transform>().position, new Vector3(Mathf.Cos(Average * K), Mathf.Sin(Average * K), 0) * 100, Color.red, 1);
     }
 
-    float GetMax(float[] Data, int index)
+    float GetAverage()
     {
-        float max = 0.0f;
+        float sum = 0.0f;
 
-        for(int i = 0; i < Data.Length; i++)
+        for(int i = 0; i < Samples.Length; i++)
         {
-            if(Data[i] > max)
-            {
-                max = Data[i];
-                index = i;
-            }
+            sum += Samples[i];
         }
 
-        return max;
+        return sum / Samples.Length;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
 }
