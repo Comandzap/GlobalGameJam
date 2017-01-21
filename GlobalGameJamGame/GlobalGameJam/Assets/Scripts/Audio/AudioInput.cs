@@ -41,7 +41,7 @@ class IndexComparer : IComparer<Peak>
 
 public class AudioInput : MonoBehaviour
 {
-
+    public Dropdown DropdownList;
 	public Image DecibelMeter;
 	public GameObject missile;
     public bool fireDir;
@@ -72,16 +72,25 @@ public class AudioInput : MonoBehaviour
 
     public Gradient g;
 
+    public float channel;
+
     void Start()
     {
         samples = new float[qSamples];
         spectrum = new float[binSize];
         samplerate = AudioSettings.outputSampleRate;
 
+        int selectedMic = DropdownList.value;
+        micNum = selectedMic;
+
+        Debug.Log(selectedMic);
+
         // starts the Microphone and attaches it to the AudioSource
-        GetComponent<AudioSource>().clip = Microphone.Start(Microphone.devices[micNum], true, 1, samplerate);
+        GetComponent<AudioSource>().clip = Microphone.Start(Microphone.devices[selectedMic], true, 1, samplerate);
         GetComponent<AudioSource>().loop = true; // Set the AudioClip to loop
-        while (!(Microphone.GetPosition(null) > 0)) { } // Wait until the recording has started
+        while (!(Microphone.GetPosition(Microphone.devices[selectedMic]) > 0)) {
+            Debug.Log("This is dumb?!");
+        } // Wait until the recording has started
         GetComponent<AudioSource>().Play();
 
         // Mutes the mixer. You have to expose the Volume element of your mixer for this to work. I named mine "masterVolume".
@@ -104,9 +113,9 @@ public class AudioInput : MonoBehaviour
         //g.SetKeys(gck, gak);
     }
 
-    void AnalyzeSound()
+    void AnalyzeSound(int channel)
     {
-        GetComponent<AudioSource>().GetOutputData(samples, 0); // fill array with samples
+        GetComponent<AudioSource>().GetOutputData(samples, channel); // fill array with samples
         int i = 0;
         float sum = 0f;
         for (i = 0; i < qSamples; i++)
@@ -118,7 +127,7 @@ public class AudioInput : MonoBehaviour
         if (dbValue < -160) dbValue = -160; // clamp it to -160dB min
 
         // get sound spectrum
-        GetComponent<AudioSource>().GetSpectrumData(spectrum, 0, FFTWindow.BlackmanHarris);
+        GetComponent<AudioSource>().GetSpectrumData(spectrum, channel, FFTWindow.BlackmanHarris);
         float maxV = 0f;
         for (i = 0; i < binSize; i++)
         { // find max
@@ -170,10 +179,7 @@ public class AudioInput : MonoBehaviour
         }
 
         Samples[sampleCounter++] = dbValue;
-    }
 
-    void Update()
-    {
         //Mathf.Sin(lowestDb * K) = 0;
         //lowestDb = 0;
 
@@ -190,28 +196,33 @@ public class AudioInput : MonoBehaviour
         if (Average > highestDb)
             Average = highestDb;
 
-		//highestDb - lowestDb;
-		DecibelMeter.fillAmount = (Average + Mathf.Abs(lowestDb)) / (Mathf.Abs(highestDb) + Mathf.Abs(lowestDb));
+        //highestDb - lowestDb;
+        DecibelMeter.fillAmount = (Average + Mathf.Abs(lowestDb)) / (Mathf.Abs(highestDb) + Mathf.Abs(lowestDb));
 
-		fireVector = new Vector3(Mathf.Cos(Average * K), Mathf.Sin(Average * K));
+        fireVector = new Vector3(Mathf.Cos(Average * K), Mathf.Sin(Average * K));
 
-        float c = pitchValue/800;
+        float c = pitchValue / 800;
 
-        if(pitchValue > 0 && pitchValue < 800)
+        if (pitchValue > 0 && pitchValue < 800)
         {
             Debug.Log(c);
             fireColor = g.Evaluate(c);
-        } else if(pitchValue >= 1000)
+        }
+        else if (pitchValue >= 1000)
         {
             fireColor = g.Evaluate(1.0f);
-        } else
+        }
+        else
         {
             fireColor = g.Evaluate(0.0f);
         }
 
-        //fireColor = new Color(color_r, color_g, color_b);
+        
+    }
 
-        //Debug.DrawLine(this.GetComponent<Transform>().position, new Vector3(Mathf.Cos(Average * K), Mathf.Sin(Average * K), 0) * 100, Color.red, 1);
+    void Update()
+    {
+        
     }
 
     float GetAverage()
