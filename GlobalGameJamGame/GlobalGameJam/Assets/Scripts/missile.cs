@@ -8,7 +8,7 @@ public class missile : MonoBehaviour {
 	bool right;
     Vector3 directionVector = new Vector3(1, 0, 0);
     public SpriteRenderer renderer;
-
+	float time = 0;
 
     // Use this for initialization
     void Start ()
@@ -29,6 +29,13 @@ public class missile : MonoBehaviour {
             directionVector.x *= -1;
 			body.AddForce(directionVector * 200);
 		}
+		
+		time += Time.deltaTime;
+		if(time > 2)
+		{
+			Destroy(this.gameObject);
+		}
+
 	}
 
 	public void direction(bool SetRight, Vector3 vector, Color color)
