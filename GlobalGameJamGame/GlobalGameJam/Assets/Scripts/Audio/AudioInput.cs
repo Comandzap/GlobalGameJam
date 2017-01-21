@@ -41,7 +41,10 @@ class IndexComparer : IComparer<Peak>
 
 public class AudioInput : MonoBehaviour
 {
-    public float rmsValue;
+	public GameObject missile;
+	public bool fireDir;
+
+	public float rmsValue;
     public float dbValue;
     public float pitchValue;
 
@@ -125,31 +128,33 @@ public class AudioInput : MonoBehaviour
     }
 
     float timer = 0.1f;
-    float[] freqSamples = new float[20];
-    float[] dbSamples = new float[20];
+    float[] freqSamples = new float[5];
+    float[] dbSamples = new float[5];
     int sampleCounter = 0;
 
     void FixedUpdate()
     {
         AnalyzeSound();
         //Debug.Log("RMS: " + rmsValue.ToString("F2") + " (" + dbValue.ToString("F1") + " dB)\n"
-         //        + "Pitch: " + pitchValue.ToString("F0") + " Hz");
-        if (sampleCounter > freqSamples.Length - 1)
-        {
+          //      + "Pitch: " + pitchValue.ToString("F0") + " Hz");
+        //if (sampleCounter > freqSamples.Length - 1)
+        //{
             sampleCounter = 0;
 
-            int index = 0;
-            float maxFreq = GetMax(freqSamples, index);
-            Debug.Log(index);
+            //int index = 0;
+            //float maxFreq = GetMax(freqSamples, index);
+            //Debug.Log(index);
 
-            if(maxFreq > 500)
+            if(pitchValue > 500)
             {
-                //Debug.Log("Should Fire");
-            } else if(maxFreq < 200 & maxFreq > 0)
+			//Debug.Log(transform.position.x);
+			(Instantiate(missile, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity) as GameObject).GetComponent<missile>().direction(fireDir);
+				Debug.Log("Should Fire");
+			} else if(pitchValue < 200 & pitchValue > 0)
             {
-                //Debug.Log("Should Jump");
+                Debug.Log("Should Jump");
             }
-        }
+        //}
         
     }
 

@@ -5,6 +5,9 @@ using UnityEngine;
 public class missile : MonoBehaviour {
 
 	Rigidbody body;
+	bool right;
+
+
 
 	// Use this for initialization
 	void Start ()
@@ -15,7 +18,19 @@ public class missile : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		body.AddForce(Vector3.right * 40);
+		if(right)
+		{
+			body.AddForce(Vector3.right * 200);
+		}
+		else
+		{
+			body.AddForce(Vector3.left * 200);
+		}
+	}
+
+	public void direction(bool SetRight)
+	{
+		right = SetRight;
 	}
 
 

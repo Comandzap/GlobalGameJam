@@ -25,7 +25,7 @@ public class movement : MonoBehaviour {
 			body.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 		}
 
-		Debug.Log(Input.GetAxis("Horizontal"));
+		//Debug.Log(Input.GetAxis("Horizontal"));
 		float horizontalForce = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
 		body.AddForce(Vector3.right * horizontalForce);
 	}
