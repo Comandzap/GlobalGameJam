@@ -10,6 +10,8 @@ public class AudioInput : MonoBehaviour {
     private bool RealtimeOutput;
     private bool lastValueOfRealtimeOutput;
 
+	public GameObject missile;
+
     int qSamples = 1024;    // Array size
     float refValue = 0.1f;
     float threshold = 0.02f; //Minimum amplitude
@@ -93,9 +95,11 @@ public class AudioInput : MonoBehaviour {
         if(pitchValue < 1000 && pitchValue > 0 && dbValue > -10)
         {
             Debug.Log("Jump: " + pitchValue.ToString("F0"));
-        } else if(pitchValue > 1000 && dbValue > -10)
+        } else if(pitchValue > 400 && dbValue > -10)
         {
-            Debug.Log("Attack" + pitchValue.ToString("F0"));
+			Debug.Log(transform.position.x);
+			Instantiate(missile,new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            //Debug.Log("Attack" + pitchValue.ToString("F0"));
         } else
         {
             Debug.Log("Do Nothing!");
