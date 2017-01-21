@@ -14,15 +14,14 @@ public class movement : MonoBehaviour {
     public bool fireDir;
 
     public GameObject missile;
+    public AudioInput audioClass;
 
-    
-
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
 	{
 		body = GetComponent<Rigidbody>();
-       
-	}
+        audioClass = this.GetComponent<AudioInput>();
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -39,7 +38,7 @@ public class movement : MonoBehaviour {
 
         if(Input.GetKeyDown(FireButton))
         {
-            AudioInput audioClass = this.GetComponent<AudioInput>();
+            
             (Instantiate(missile, transform.position, Quaternion.identity) as GameObject).GetComponent<missile>().direction(fireDir, audioClass.GetDirectionVector(), audioClass.GetColorTemp());
         }
 	}

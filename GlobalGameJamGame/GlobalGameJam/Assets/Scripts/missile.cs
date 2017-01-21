@@ -7,7 +7,7 @@ public class missile : MonoBehaviour {
 	Rigidbody body;
 	bool right;
     Vector3 directionVector = new Vector3(1, 0, 0);
-    SpriteRenderer renderer;
+    public SpriteRenderer renderer;
 
 
     // Use this for initialization
