@@ -41,7 +41,9 @@ class IndexComparer : IComparer<Peak>
 
 public class AudioInput : MonoBehaviour
 {
-    public GameObject missile;
+
+	public Image DecibelMeter;
+	public GameObject missile;
     public bool fireDir;
 
     public float rmsValue;
@@ -176,7 +178,7 @@ public class AudioInput : MonoBehaviour
         //lowestDb = 0;
 
         //(highestDb + Mathf.Abs(lowestDb)) * k = Mathf.Sqrt(2) / 2;
-        float K = (Mathf.Sqrt(2) / 2) / (highestDb + Mathf.Abs(highestDb));
+        float K = (Mathf.Sqrt(2) / 2) / (highestDb + Mathf.Abs(lowestDb));
 
 
         //Debug.Log(Mathf.Sin(GetAverage() * K));
@@ -188,8 +190,10 @@ public class AudioInput : MonoBehaviour
         if (Average > highestDb)
             Average = highestDb;
 
+		//highestDb - lowestDb;
+		DecibelMeter.fillAmount = (Average + Mathf.Abs(lowestDb)) / (Mathf.Abs(highestDb) + Mathf.Abs(lowestDb));
 
-        fireVector = new Vector3(Mathf.Cos(Average * K), Mathf.Sin(Average * K));
+		fireVector = new Vector3(Mathf.Cos(Average * K), Mathf.Sin(Average * K));
 
         float c = pitchValue/800;
 
