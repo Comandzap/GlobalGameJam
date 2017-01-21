@@ -142,10 +142,10 @@ public class AudioInput : MonoBehaviour
             float maxFreq = GetMax(freqSamples, index);
             Debug.Log(index);
 
-            if(maxFreq > 1000)
+            if(maxFreq > 500)
             {
                 //Debug.Log("Should Fire");
-            } else if(maxFreq < 1000 & maxFreq > 0)
+            } else if(maxFreq < 200 & maxFreq > 0)
             {
                 //Debug.Log("Should Jump");
             }
