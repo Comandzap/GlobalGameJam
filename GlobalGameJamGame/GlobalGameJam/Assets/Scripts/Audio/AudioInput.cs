@@ -65,6 +65,11 @@ public class AudioInput : MonoBehaviour
 
     public int micNum = 0;
 
+    public Vector3 fireVector = new Vector3(1, 0, 0);
+    public Color fireColor = new Color(255, 0, 0);
+
+    public Gradient g;
+
     void Start()
     {
         samples = new float[qSamples];
@@ -79,6 +84,22 @@ public class AudioInput : MonoBehaviour
 
         // Mutes the mixer. You have to expose the Volume element of your mixer for this to work. I named mine "masterVolume".
         masterMixer.SetFloat("masterVolume", -80f);
+
+
+        //GradientColorKey[] gck;
+        //GradientAlphaKey[] gak;
+        //g = new Gradient();
+        //gck = new GradientColorKey[2];
+        //gck[0].color = Color.red;
+        //gck[0].time = 0.0F;
+        //gck[1].color = Color.blue;
+        //gck[1].time = 1.0F;
+        //gak = new GradientAlphaKey[2];
+        //gak[0].alpha = 1.0F;
+        //gak[0].time = 0.0F;
+        //gak[1].alpha = 0.0F;
+        //gak[1].time = 1.0F;
+        //g.SetKeys(gck, gak);
     }
 
     void AnalyzeSound()
@@ -109,21 +130,21 @@ public class AudioInput : MonoBehaviour
                 }
             }
         }
-        //float freqN = 0f;
-        //if (peaks.Count > 0)
-        //{
-        //    peaks.Sort(new IndexComparer()); // sort indices in ascending order
-        //    maxV = peaks[0].amplitude;
-        //    int maxN = peaks[0].index;
-        //    freqN = maxN; // pass the index to a float variable
-        //    if (maxN > 0 && maxN < binSize - 1)
-        //    { // interpolate index using neighbours
-        //        var dL = spectrum[maxN - 1] / spectrum[maxN];
-        //        var dR = spectrum[maxN + 1] / spectrum[maxN];
-        //        freqN += 0.5f * (dR * dR - dL * dL);
-        //    }
-        //}
-        //pitchValue = freqN * (samplerate / 2f) / binSize; // convert index to frequency
+        float freqN = 0f;
+        if (peaks.Count > 0)
+        {
+            peaks.Sort(new IndexComparer()); // sort indices in ascending order
+            maxV = peaks[0].amplitude;
+            int maxN = peaks[0].index;
+            freqN = maxN; // pass the index to a float variable
+            if (maxN > 0 && maxN < binSize - 1)
+            { // interpolate index using neighbours
+                var dL = spectrum[maxN - 1] / spectrum[maxN];
+                var dR = spectrum[maxN + 1] / spectrum[maxN];
+                freqN += 0.5f * (dR * dR - dL * dL);
+            }
+        }
+        pitchValue = freqN * (samplerate / 2f) / binSize; // convert index to frequency
         peaks.Clear();
     }
 
@@ -132,7 +153,7 @@ public class AudioInput : MonoBehaviour
     public float lowestDb = -15.0f;
     public float highestDb = 10.0f;
 
-    float[] Samples = new float[10];
+    float[] Samples = new float[25];
     int sampleCounter = 0;
 
     void FixedUpdate()
@@ -140,9 +161,6 @@ public class AudioInput : MonoBehaviour
         AnalyzeSound();
         //Debug.Log("RMS: " + rmsValue.ToString("F2") + " (" + dbValue.ToString("F1") + " dB)\n"
         //      + "Pitch: " + pitchValue.ToString("F0") + " Hz");
-
-        // 10 Db = 45 grader
-        // -15.0f = -45 grader
 
         if(sampleCounter > Samples.Length-1)
         {
@@ -161,7 +179,7 @@ public class AudioInput : MonoBehaviour
         float K = (Mathf.Sqrt(2) / 2) / (highestDb + Mathf.Abs(highestDb));
 
 
-        Debug.Log(Mathf.Sin(GetAverage() * K));
+        //Debug.Log(Mathf.Sin(GetAverage() * K));
 
         float Average = GetAverage();
 
@@ -170,7 +188,26 @@ public class AudioInput : MonoBehaviour
         if (Average > highestDb)
             Average = highestDb;
 
-        Debug.DrawLine(this.GetComponent<Transform>().position, new Vector3(Mathf.Cos(Average * K), Mathf.Sin(Average * K), 0) * 100, Color.red, 1);
+
+        fireVector = new Vector3(Mathf.Cos(Average * K), Mathf.Sin(Average * K));
+
+        float c = pitchValue/800;
+
+        if(pitchValue > 0 && pitchValue < 800)
+        {
+            Debug.Log(c);
+            fireColor = g.Evaluate(c);
+        } else if(pitchValue >= 1000)
+        {
+            fireColor = g.Evaluate(1.0f);
+        } else
+        {
+            fireColor = g.Evaluate(0.0f);
+        }
+
+        //fireColor = new Color(color_r, color_g, color_b);
+
+        //Debug.DrawLine(this.GetComponent<Transform>().position, new Vector3(Mathf.Cos(Average * K), Mathf.Sin(Average * K), 0) * 100, Color.red, 1);
     }
 
     float GetAverage()
@@ -183,6 +220,16 @@ public class AudioInput : MonoBehaviour
         }
 
         return sum / Samples.Length;
+    }
+
+    public Vector3 GetDirectionVector()
+    {
+        return fireVector;
+    }
+
+    public Color GetColorTemp()
+    {
+        return fireColor;
     }
 
     private void OnCollisionEnter(Collision collision)

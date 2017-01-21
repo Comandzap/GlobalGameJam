@@ -9,11 +9,19 @@ public class movement : MonoBehaviour {
 	Rigidbody body;
 	public float speed;
 	public string Jumpbottum;
+    public string FireButton;
+
+    public bool fireDir;
+
+    public GameObject missile;
+
+    
 
 	// Use this for initialization
 	void Start ()
 	{
 		body = GetComponent<Rigidbody>();
+       
 	}
 	
 	// Update is called once per frame
@@ -28,6 +36,12 @@ public class movement : MonoBehaviour {
 		//Debug.Log(Input.GetAxis("Horizontal"));
 		float horizontalForce = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
 		body.AddForce(Vector3.right * horizontalForce);
+
+        if(Input.GetKeyDown(FireButton))
+        {
+            AudioInput audioClass = this.GetComponent<AudioInput>();
+            (Instantiate(missile, transform.position, Quaternion.identity) as GameObject).GetComponent<missile>().direction(fireDir, audioClass.GetDirectionVector(), audioClass.GetColorTemp());
+        }
 	}
 
 
