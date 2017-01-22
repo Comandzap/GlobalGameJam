@@ -88,15 +88,32 @@ public class AudioInput : MonoBehaviour
         spectrum = new float[binSize];
         samplerate = AudioSettings.outputSampleRate;
 
-        // starts the Microphone and attaches it to the AudioSource
-        GetComponent<AudioSource>().clip = Microphone.Start(Microphone.devices[micNum], true, 1, samplerate);
-        GetComponent<AudioSource>().loop = true; // Set the AudioClip to loop
-        while (!(Microphone.GetPosition(Microphone.devices[micNum]) > 0)) {
-        } // Wait until the recording has started
-        GetComponent<AudioSource>().Play();
+        if (Microphone.devices.Length == 1)
+        {
+            // starts the Microphone and attaches it to the AudioSource
+            GetComponent<AudioSource>().clip = Microphone.Start(Microphone.devices[micNum], true, 1, samplerate);
+            GetComponent<AudioSource>().loop = true; // Set the AudioClip to loop
+            while (!(Microphone.GetPosition(Microphone.devices[micNum]) > 0))
+            {
+            } // Wait until the recording has started
+            GetComponent<AudioSource>().Play();
 
-        // Mutes the mixer. You have to expose the Volume element of your mixer for this to work. I named mine "masterVolume".
-        masterMixer.SetFloat("masterVolume", -80f);
+            // Mutes the mixer. You have to expose the Volume element of your mixer for this to work. I named mine "masterVolume".
+            masterMixer.SetFloat("masterVolume", -80f);
+        }
+        else
+        {
+            // starts the Microphone and attaches it to the AudioSource
+            GetComponent<AudioSource>().clip = Microphone.Start(Microphone.devices[micNum], true, 1, samplerate);
+            GetComponent<AudioSource>().loop = true; // Set the AudioClip to loop
+            while (!(Microphone.GetPosition(Microphone.devices[micNum]) > 0))
+            {
+            } // Wait until the recording has started
+            GetComponent<AudioSource>().Play();
+
+            // Mutes the mixer. You have to expose the Volume element of your mixer for this to work. I named mine "masterVolume".
+            masterMixer.SetFloat("masterVolume", -80f);
+        }
     }
 
     void AnalyzeSound(int channel)

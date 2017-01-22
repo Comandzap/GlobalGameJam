@@ -2,33 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class movement : MonoBehaviour {
-
-
-	public Transform playerUI;
-	bool jump = false;
-	public float jumpPower;
-	Rigidbody body;
-	public float speed;
-	public string Jumpbottum;
+public class movement : MonoBehaviour
+{
+    public Transform playerUI;
+    bool jump = false;
+    public float jumpPower;
+    Rigidbody body;
+    public float speed;
+    public string Jumpbottum;
     public string FireButton;
 
     public bool fireDir;
 
     public GameObject missile;
 
-	public float facing;
+    public float facing;
 
     public string Axis;
 
-    public string W;
-    public string A;
-    public string S;
-    public string D;
+    public string playerHorizontal;
+    public string playerJump;
 
     public GameObject health0;
     public GameObject health1;
     public GameObject health2;
+
+    public BoxCollider2D groundFinder;
+
 
     public GameObject OtherPlayer;
 
@@ -50,18 +50,44 @@ public class movement : MonoBehaviour {
         healthBar[2] = health2;
 
         OtherPlayer = GetComponent<AudioInput>().OtherPlayer;
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-        if(body.velocity.magnitude > 14.0f)
+    }
+
+    void updateMovement()
+    {
+        Vector2 force = new Vector2(0, 0);
+        float horizontal = Input.GetAxis(playerHorizontal);
+
+        if (Input.GetButtonDown(playerJump))
+        {
+            if (Mathf.Abs(body.velocity.y) < 100)
+            {
+                force = Vector2.up * jumpPower;
+            }
+        }
+        force += Time.deltaTime * Vector2.right * speed * horizontal;
+
+        body.AddForce(force);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (body.velocity.magnitude > 14.0f)
         {
             body.velocity = 14.0f * body.velocity.normalized;
         }
 
-        Debug.Log(body.velocity.magnitude);
+//        Debug.Lasog(body.velocity.magnitude);
 
+        updateMovement();
+//        oldMovement();
+
+        playerUI.transform.position = new Vector2(transform.position.x + facing * 2, transform.position.y);
+        playerUI.transform.localScale = new Vector3(facing, 1, 1);
+    }
+
+    private void oldMovement()
+    {
         if (!controller)
         {
             Vector2 force = new Vector2(0, 0);
@@ -78,7 +104,6 @@ public class movement : MonoBehaviour {
             {
                 if (Input.GetKey(KeyCode.S))
                 {
-
                 }
 
                 if (Input.GetKey(KeyCode.A))
@@ -107,9 +132,11 @@ public class movement : MonoBehaviour {
                 }
             }
 
-            if(Input.GetButton("Fire1"))
+            if (Input.GetButton("Fire1"))
             {
-                (Instantiate(missile, playerUI.transform.position, Quaternion.identity) as GameObject).GetComponent<missile>().direction(fireDir, OtherPlayer.transform.position, new Color(1,1,1,1));
+                (Instantiate(missile, playerUI.transform.position, Quaternion.identity) as GameObject)
+                    .GetComponent<missile>()
+                    .direction(fireDir, OtherPlayer.transform.position, new Color(1, 1, 1, 1));
             }
 
             if (jump)
@@ -117,18 +144,16 @@ public class movement : MonoBehaviour {
 
             body.AddForce(force);
         }
-
-		playerUI.transform.position = new Vector2(transform.position.x+ facing*2, transform.position.y);
-		playerUI.transform.localScale = new Vector3(facing, 1,1);
-	}
+    }
 
 
-	void OnCollisionEnter(Collision col)
-	{
-		if (col.gameObject.tag == "Ground" || col.gameObject.tag == "Player")
-		{
-			jump = false;
-		} else
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Ground" || col.gameObject.tag == "Player")
+        {
+            jump = false;
+        }
+        else
         {
             jump = true;
         }
@@ -158,6 +183,5 @@ public class movement : MonoBehaviour {
                     break;
             }
         }
-	}
-
+    }
 }
