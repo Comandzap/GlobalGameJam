@@ -7,7 +7,7 @@ public class movement : MonoBehaviour
     public Transform playerUI;
     bool jump = false;
     public float jumpPower;
-    Rigidbody body;
+    Rigidbody2D body;
     public float speed;
     public string Jumpbottum;
     public string FireButton;
@@ -41,7 +41,7 @@ public class movement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        body = GetComponent<Rigidbody>();
+        body = GetComponent<Rigidbody2D>();
 
         healthBar = new GameObject[health];
 
@@ -147,8 +147,10 @@ public class movement : MonoBehaviour
     }
 
 
-    void OnCollisionEnter(Collision col)
+    void OnCollisionEnter2D(Collision2D col)
     {
+        Debug.Log("Colliding!");
+
         if (col.gameObject.tag == "Ground" || col.gameObject.tag == "Player")
         {
             jump = false;
