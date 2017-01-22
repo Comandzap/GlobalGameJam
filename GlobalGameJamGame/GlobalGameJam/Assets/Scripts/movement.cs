@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class movement : MonoBehaviour
     public Transform playerUI;
     bool jump = false;
     public float jumpPower;
-    Rigidbody2D body;
+    Rigidbody body;
     public float speed;
     public string Jumpbottum;
     public string FireButton;
@@ -28,6 +29,9 @@ public class movement : MonoBehaviour
     public GameObject health2;
 
     public BoxCollider2D groundFinder;
+    public Animator charAnimatior;
+
+    public float eeeviiil = 0;
 
 
     public GameObject OtherPlayer;
@@ -41,7 +45,7 @@ public class movement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        body = GetComponent<Rigidbody2D>();
+        body = GetComponent<Rigidbody>();
 
         healthBar = new GameObject[health];
 
@@ -54,9 +58,41 @@ public class movement : MonoBehaviour
 
     void updateMovement()
     {
+        charAnimatior.SetFloat("Evil", eeeviiil);
         Vector2 force = new Vector2(0, 0);
         float horizontal = Input.GetAxis(playerHorizontal);
 
+
+        if (body.velocity.x != 0)
+        {
+            if (body.velocity.x > 0)
+            {
+                Vector3 s = transform.localScale;
+                s.x = -Mathf.Abs(s.x);
+                transform.localScale = s;
+            }
+            else
+            {
+                Vector3 s = transform.localScale;
+                s.x = Mathf.Abs(s.x);
+                transform.localScale = s;
+            }
+        }
+        if (Mathf.Abs(horizontal) > 0.05f)
+        {
+            if (horizontal > 0)
+            {
+                Vector3 s = transform.localScale;
+                s.x = -Mathf.Abs(s.x);
+                transform.localScale = s;
+            }
+            else
+            {
+                Vector3 s = transform.localScale;
+                s.x = Mathf.Abs(s.x);
+                transform.localScale = s;
+            }
+        }
         if (Input.GetButtonDown(playerJump))
         {
             if (Mathf.Abs(body.velocity.y) < 100)
@@ -65,6 +101,17 @@ public class movement : MonoBehaviour
             }
         }
         force += Time.deltaTime * Vector2.right * speed * horizontal;
+
+        if (body.velocity.y > 1)
+        {
+            charAnimatior.SetBool("InAir", true);
+            charAnimatior.SetBool("OnGround", false);
+        }
+        else
+        {
+            charAnimatior.SetBool("InAir", false);
+            charAnimatior.SetBool("OnGround", true);
+        }
 
         body.AddForce(force);
     }
@@ -147,10 +194,8 @@ public class movement : MonoBehaviour
     }
 
 
-    void OnCollisionEnter2D(Collision2D col)
+    void OnCollisionEnter(Collision col)
     {
-        Debug.Log("Colliding!");
-
         if (col.gameObject.tag == "Ground" || col.gameObject.tag == "Player")
         {
             jump = false;
