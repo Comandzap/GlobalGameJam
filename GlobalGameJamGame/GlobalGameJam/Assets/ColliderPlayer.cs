@@ -4,19 +4,29 @@ using UnityEngine;
 
 public class ColliderPlayer : MonoBehaviour {
 
-    public Collider2D otherCollider;
-    Collider2D ourCollider;
+    public GameObject otherPlayer;
+    Collider ourCollider;
+
+    GameObject ourParent;
 
 	// Use this for initialization
 	void Start () {
-        ourCollider = this.GetComponent<Collider2D>();
+        ourCollider = this.GetComponent<Collider>();
+        ourParent = this.transform.parent.gameObject;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (ourCollider.bounds.Intersects(otherCollider.bounds))
+        if (ourCollider.bounds.Intersects(otherPlayer.GetComponent<Collider>().bounds))
         {
-            Debug.Log("Intersecting other player!");
+            if(ourParent.GetComponent<AudioInput>().shouting)
+            {
+                // Damage other player.
+                if(otherPlayer)
+                    otherPlayer.GetComponent<movement>().TakeDamage();
+            }
+            
+            //Debug.Log("Intersecting other player!");
         }
 	}
 }
