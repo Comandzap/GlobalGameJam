@@ -42,6 +42,29 @@ public class movement : MonoBehaviour
 
     public bool controller = false;
 
+    float damageTimer = 0.0f;
+    float cooldown = 5.0f;
+
+    public AudioClip Jump1;
+    public AudioClip Jump2;
+    public AudioClip Jump3;
+    public AudioClip Jump4;
+
+    public AudioClip[] JumpSounds = new AudioClip[4];
+    public AudioClip[] TakeDamageSounds = new AudioClip[4];
+
+    public AudioClip Land;
+
+    public AudioClip takeDamage1;
+    public AudioClip takeDamage2;
+    public AudioClip takeDamage3;
+    public AudioClip takeDamage4;
+
+    public GameObject AudioGo;
+
+
+    bool isCooldown = true;
+
     // Use this for initialization
     void Start()
     {
@@ -54,6 +77,16 @@ public class movement : MonoBehaviour
         healthBar[2] = health2;
 
         OtherPlayer = GetComponent<AudioInput>().OtherPlayer;
+
+        JumpSounds[0] = Jump1;
+        JumpSounds[1] = Jump2;
+        JumpSounds[2] = Jump3;
+        JumpSounds[3] = Jump4;
+
+        TakeDamageSounds[0] = takeDamage1;
+        TakeDamageSounds[1] = takeDamage2;
+        TakeDamageSounds[2] = takeDamage3;
+        TakeDamageSounds[3] = takeDamage4;
     }
 
     void updateMovement()
@@ -95,21 +128,30 @@ public class movement : MonoBehaviour
         }
         if (Input.GetButtonDown(playerJump))
         {
+            
             if (Mathf.Abs(body.velocity.y) < 100)
             {
+                Debug.Log((int)UnityEngine.Random.Range(0.0f, 4.0f));
+                AudioGo.GetComponent<AudioSource>().clip = JumpSounds[(int)UnityEngine.Random.Range(0.0f, 4.0f)];
+                AudioGo.GetComponent<AudioSource>().loop = false;
+                AudioGo.GetComponent<AudioSource>().Play();
+
                 force = Vector2.up * jumpPower;
+                jump = true;
             }
         }
         force += Time.deltaTime * Vector2.right * speed * horizontal;
 
+
+
         if (body.velocity.y > 1)
         {
-            charAnimatior.SetBool("InAir", true);
+            charAnimatior.SetBool("InAir", jump);
             charAnimatior.SetBool("OnGround", false);
         }
         else
         {
-            charAnimatior.SetBool("InAir", false);
+            charAnimatior.SetBool("InAir", jump);
             charAnimatior.SetBool("OnGround", true);
         }
 
@@ -131,6 +173,8 @@ public class movement : MonoBehaviour
 
         playerUI.transform.position = new Vector2(transform.position.x + facing * 2, transform.position.y);
         playerUI.transform.localScale = new Vector3(facing, 1, 1);
+
+        damageTimer += Time.deltaTime;
     }
 
     private void oldMovement()
@@ -204,31 +248,49 @@ public class movement : MonoBehaviour
         {
             jump = true;
         }
+    }
 
+    public void TakeDamage()
+    {
 
-        if (col.gameObject.tag == "Projectile")
+        if (isCooldown)
         {
+            if (damageTimer > cooldown)
+            {
+                isCooldown = false;
+            }
+        }
+
+        if(!isCooldown)
+        {
+            damageTimer = 0.0f;
+            Debug.Log((int)UnityEngine.Random.Range(0.0f, 4.0f));
+            AudioGo.GetComponent<AudioSource>().clip = TakeDamageSounds[(int)UnityEngine.Random.Range(0.0f, 4.0f)];
+            AudioGo.GetComponent<AudioSource>().loop = false;
+            AudioGo.GetComponent<AudioSource>().Play();
             switch (health)
             {
                 case 3:
                     healthBar[2].GetComponent<Animator>().SetTrigger("Explode");
-                    Destroy(col.gameObject);
+                    //Destroy(healthBar[2]);
                     health--;
                     break;
                 case 2:
                     healthBar[1].GetComponent<Animator>().SetTrigger("Explode");
-                    Destroy(col.gameObject);
+                    //Destroy(healthBar[2]);
                     health--;
                     break;
                 case 1:
                     healthBar[0].GetComponent<Animator>().SetTrigger("Explode");
-                    Destroy(col.gameObject);
+                    //Destroy(col.gameObject);
                     health--;
                     break;
                 default:
                     Debug.Log("You are dead!");
+                    //Destroy();
                     break;
             }
+            isCooldown = true;
         }
     }
 }
