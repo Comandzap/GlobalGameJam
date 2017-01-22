@@ -47,12 +47,18 @@ public class AudioInput : MonoBehaviour
 
     public RectTransform PlayerUI;
 
+    public Animator charAnimator;
+
     public float rmsValue;
     public float dbValue;
     public float pitchValue;
 
     public int qSamples = 1024;
-    public int binSize = 8192; // you can change this up, I originally used 8192 for better resolution, but I stuck with 1024 because it was slow-performing on the phone
+
+    public int binSize =
+            8192
+        ; // you can change this up, I originally used 8192 for better resolution, but I stuck with 1024 because it was slow-performing on the phone
+
     public float refValue = 0.1f;
     public float threshold = 0.01f;
 
@@ -68,6 +74,8 @@ public class AudioInput : MonoBehaviour
     public bool mute = true;
     public AudioMixer masterMixer; // drag an Audio Mixer here in the inspector
 
+    public int channelId = 0;
+
     public int micNum = 0;
 
     public Vector3 fireVector = new Vector3(1, 0, 0);
@@ -79,7 +87,7 @@ public class AudioInput : MonoBehaviour
 
     void Start()
     {
-        foreach(string device in Microphone.devices)
+        foreach (string device in Microphone.devices)
         {
             Debug.Log(device);
         }
@@ -88,32 +96,16 @@ public class AudioInput : MonoBehaviour
         spectrum = new float[binSize];
         samplerate = AudioSettings.outputSampleRate;
 
-        if (Microphone.devices.Length == 1)
+        // starts the Microphone and attaches it to the AudioSource
+        GetComponent<AudioSource>().clip = Microphone.Start(Microphone.devices[micNum], true, 1, samplerate);
+        GetComponent<AudioSource>().loop = true; // Set the AudioClip to loop
+        while (!(Microphone.GetPosition(Microphone.devices[micNum]) > 0))
         {
-            // starts the Microphone and attaches it to the AudioSource
-            GetComponent<AudioSource>().clip = Microphone.Start(Microphone.devices[micNum], true, 1, samplerate);
-            GetComponent<AudioSource>().loop = true; // Set the AudioClip to loop
-            while (!(Microphone.GetPosition(Microphone.devices[micNum]) > 0))
-            {
-            } // Wait until the recording has started
-            GetComponent<AudioSource>().Play();
+        } // Wait until the recording has started
+        GetComponent<AudioSource>().Play();
 
-            // Mutes the mixer. You have to expose the Volume element of your mixer for this to work. I named mine "masterVolume".
-            masterMixer.SetFloat("masterVolume", -80f);
-        }
-        else
-        {
-            // starts the Microphone and attaches it to the AudioSource
-            GetComponent<AudioSource>().clip = Microphone.Start(Microphone.devices[micNum], true, 1, samplerate);
-            GetComponent<AudioSource>().loop = true; // Set the AudioClip to loop
-            while (!(Microphone.GetPosition(Microphone.devices[micNum]) > 0))
-            {
-            } // Wait until the recording has started
-            GetComponent<AudioSource>().Play();
-
-            // Mutes the mixer. You have to expose the Volume element of your mixer for this to work. I named mine "masterVolume".
-            masterMixer.SetFloat("masterVolume", -80f);
-        }
+        // Mutes the mixer. You have to expose the Volume element of your mixer for this to work. I named mine "masterVolume".
+        masterMixer.SetFloat("masterVolume", -80f);
     }
 
     void AnalyzeSound(int channel)
@@ -133,12 +125,14 @@ public class AudioInput : MonoBehaviour
         GetComponent<AudioSource>().GetSpectrumData(spectrum, channel, FFTWindow.BlackmanHarris);
         float maxV = 0f;
         for (i = 0; i < binSize; i++)
-        { // find max
+        {
+            // find max
             if (spectrum[i] > maxV && spectrum[i] > threshold)
             {
                 peaks.Add(new Peak(spectrum[i], i));
                 if (peaks.Count > 5)
-                { // get the 5 peaks in the sample with the highest amplitudes
+                {
+                    // get the 5 peaks in the sample with the highest amplitudes
                     peaks.Sort(new AmpComparer()); // sort peak amplitudes from highest to lowest
                     //peaks.Remove (peaks [5]); // remove peak with the lowest amplitude
                 }
@@ -152,7 +146,8 @@ public class AudioInput : MonoBehaviour
             int maxN = peaks[0].index;
             freqN = maxN; // pass the index to a float variable
             if (maxN > 0 && maxN < binSize - 1)
-            { // interpolate index using neighbours
+            {
+                // interpolate index using neighbours
                 var dL = spectrum[maxN - 1] / spectrum[maxN];
                 var dR = spectrum[maxN + 1] / spectrum[maxN];
                 freqN += 0.5f * (dR * dR - dL * dL);
@@ -173,11 +168,12 @@ public class AudioInput : MonoBehaviour
 
     void FixedUpdate()
     {
-        AnalyzeSound(0);
+        AnalyzeSound(channelId);
         if (sampleCounter > Samples_1.Length - 1)
         {
             sampleCounter = 0;
         }
+
 
         Freq_Array1[sampleCounter] = pitchValue;
         Samples_1[sampleCounter++] = dbValue;
@@ -195,18 +191,33 @@ public class AudioInput : MonoBehaviour
         float K = (Mathf.Sqrt(2) / 2) / (highestDb + Mathf.Abs(lowestDb));
         float Average = GetAverage(Samples_1);
 
+        lowestDb = Mathf.Min(Samples_1);
+        highestDb = Mathf.Max(Samples_1);
+
+
+        charAnimator.SetBool("SCREAMING", Average > -4);
+        Debug.Log(Average > -4);
+//            Debug.Log("Average: " + Average + " lowest: " + lowestDb + " higest: " + highestDb);
+
+
         if (Average < lowestDb)
+        {
             Average = lowestDb;
+        }
         if (Average > highestDb)
         {
             Average = highestDb;
             // Fire a projectile if its not on cooldown
 
-            if(!projectileCooldown)
+            if (!projectileCooldown)
             {
-                (Instantiate(missile, this.transform.position + (OtherPlayer.transform.position - OtherPlayer.transform.position).normalized*5, Quaternion.identity) as GameObject).GetComponent<missile>().direction(fireDir, OtherPlayer.transform.position, GetColorTemp());
+                (Instantiate(missile,
+                        this.transform.position + (OtherPlayer.transform.position - OtherPlayer.transform.position)
+                        .normalized * 5, Quaternion.identity) as GameObject).GetComponent<missile>()
+                    .direction(fireDir, OtherPlayer.transform.position, GetColorTemp());
                 projectileCooldown = true;
-            } else
+            }
+            else
             {
                 protimer += Time.fixedDeltaTime;
             }
@@ -225,7 +236,8 @@ public class AudioInput : MonoBehaviour
         if (pitchValue > 0 && pitchValue < 800)
         {
             fireColor = g.Evaluate(c);
-        } else if (pitchValue >= 1000)
+        }
+        else if (pitchValue >= 1000)
         {
             fireColor = g.Evaluate(1.0f);
         }
@@ -248,13 +260,14 @@ public class AudioInput : MonoBehaviour
     {
         float sum = 0.0f;
 
-        for(int i = 0; i < Data.Length; i++)
+        for (int i = 0; i < Data.Length; i++)
         {
             sum += Data[i];
         }
 
         return sum / Data.Length;
     }
+
 
     public Vector3 GetDirectionVector()
     {
@@ -268,6 +281,5 @@ public class AudioInput : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
     }
 }

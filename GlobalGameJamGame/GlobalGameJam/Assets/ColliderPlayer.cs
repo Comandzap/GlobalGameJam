@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ColliderPlayer : MonoBehaviour {
 
+    public Collider2D otherCollider;
     Collider2D ourCollider;
 
 	// Use this for initialization
@@ -13,13 +14,9 @@ public class ColliderPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
-
-
+        if (ourCollider.bounds.Intersects(otherCollider.bounds))
+        {
+            Debug.Log("Intersecting other player!");
+        }
 	}
-
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        Debug.Log("Im colliding with: " + col.gameObject.name);
-    }
 }

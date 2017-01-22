@@ -1,0 +1,141 @@
+fileFormatVersion: 2
+guid: 5a3fdf42b6a53fd4790668bb71ed153a
+timeCreated: 1485076247
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: ScreamoDudeRig:BS_Teeth
+    100004: ScreamoDudeRig:Character
+    100006: ScreamoDudeRig:DinosNew7:GEO_GRP
+    100008: ScreamoDudeRig:DinosNew7:pCube71
+    100010: ScreamoDudeRig:DinosNew7:pCube72
+    100012: ScreamoDudeRig:DinosNew7:Space_CNTRL
+    100014: ScreamoDudeRig:GEO_GRP
+    100016: ScreamoDudeRig:joint1
+    100018: ScreamoDudeRig:joint10
+    100020: ScreamoDudeRig:joint11
+    100022: ScreamoDudeRig:joint12
+    100024: ScreamoDudeRig:joint16
+    100026: ScreamoDudeRig:joint17
+    100028: ScreamoDudeRig:joint18
+    100030: ScreamoDudeRig:joint18 1
+    100032: ScreamoDudeRig:joint19
+    100034: ScreamoDudeRig:joint19 1
+    100036: ScreamoDudeRig:joint2
+    100038: ScreamoDudeRig:joint2 1
+    100040: ScreamoDudeRig:joint20
+    100042: ScreamoDudeRig:joint21
+    100044: ScreamoDudeRig:joint25
+    100046: ScreamoDudeRig:joint3
+    100048: ScreamoDudeRig:joint3 1
+    100050: ScreamoDudeRig:joint5
+    100052: ScreamoDudeRig:joint6
+    100054: ScreamoDudeRig:joint7
+    100056: ScreamoDudeRig:joint8
+    100058: ScreamoDudeRig:joint9
+    100060: ScreamoDudeRig:Rig
+    100062: ScreamoDudeRig:Skeleton_Root
+    400000: //RootNode
+    400002: ScreamoDudeRig:BS_Teeth
+    400004: ScreamoDudeRig:Character
+    400006: ScreamoDudeRig:DinosNew7:GEO_GRP
+    400008: ScreamoDudeRig:DinosNew7:pCube71
+    400010: ScreamoDudeRig:DinosNew7:pCube72
+    400012: ScreamoDudeRig:DinosNew7:Space_CNTRL
+    400014: ScreamoDudeRig:GEO_GRP
+    400016: ScreamoDudeRig:joint1
+    400018: ScreamoDudeRig:joint10
+    400020: ScreamoDudeRig:joint11
+    400022: ScreamoDudeRig:joint12
+    400024: ScreamoDudeRig:joint16
+    400026: ScreamoDudeRig:joint17
+    400028: ScreamoDudeRig:joint18
+    400030: ScreamoDudeRig:joint18 1
+    400032: ScreamoDudeRig:joint19
+    400034: ScreamoDudeRig:joint19 1
+    400036: ScreamoDudeRig:joint2
+    400038: ScreamoDudeRig:joint2 1
+    400040: ScreamoDudeRig:joint20
+    400042: ScreamoDudeRig:joint21
+    400044: ScreamoDudeRig:joint25
+    400046: ScreamoDudeRig:joint3
+    400048: ScreamoDudeRig:joint3 1
+    400050: ScreamoDudeRig:joint5
+    400052: ScreamoDudeRig:joint6
+    400054: ScreamoDudeRig:joint7
+    400056: ScreamoDudeRig:joint8
+    400058: ScreamoDudeRig:joint9
+    400060: ScreamoDudeRig:Rig
+    400062: ScreamoDudeRig:Skeleton_Root
+    4300000: ScreamoDudeRig:DinosNew7:pCube71
+    4300002: ScreamoDudeRig:DinosNew7:pCube72
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: ScreamoDudeRig:DinosNew7:pCube71
+    13700002: ScreamoDudeRig:DinosNew7:pCube72
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
