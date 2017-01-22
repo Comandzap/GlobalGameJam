@@ -85,8 +85,29 @@ public class AudioInput : MonoBehaviour
 
     public float channel;
 
+    public bool shouting;
+
+    public GameObject SoundEffectPlayer;
+    public GameObject ShoutEffectPlayer;
+
+    float ShoutTimer = 0.0f;
+    float MaxShoutTime = 2.0f;
+
+    public AudioClip Shout1;
+    public AudioClip Shout2;
+    public AudioClip Shout3;
+    public AudioClip Shout4;
+
+    AudioClip[] Shouts = new AudioClip[4];
+
+
     void Start()
     {
+        Shouts[0] = Shout1;
+        Shouts[1] = Shout2;
+        Shouts[2] = Shout3;
+        Shouts[3] = Shout4;
+
         foreach (string device in Microphone.devices)
         {
             Debug.Log(device);
@@ -97,7 +118,7 @@ public class AudioInput : MonoBehaviour
         samplerate = AudioSettings.outputSampleRate;
 
         // starts the Microphone and attaches it to the AudioSource
-        GetComponent<AudioSource>().clip = Microphone.Start(Microphone.devices[micNum], true, 1, samplerate);
+        GetComponent<AudioSource>().clip = Microphone.Start(Microphone.devices[micNum], true, 5, samplerate);
         GetComponent<AudioSource>().loop = true; // Set the AudioClip to loop
         while (!(Microphone.GetPosition(Microphone.devices[micNum]) > 0))
         {
@@ -106,6 +127,8 @@ public class AudioInput : MonoBehaviour
 
         // Mutes the mixer. You have to expose the Volume element of your mixer for this to work. I named mine "masterVolume".
         masterMixer.SetFloat("masterVolume", -80f);
+
+        
     }
 
     void AnalyzeSound(int channel)
@@ -186,6 +209,8 @@ public class AudioInput : MonoBehaviour
     float maxTime = 1.0f;
     float protimer = 0.0f;
 
+    bool soundPlaying = false;
+
     void Update_Player()
     {
         float K = (Mathf.Sqrt(2) / 2) / (highestDb + Mathf.Abs(lowestDb));
@@ -194,9 +219,36 @@ public class AudioInput : MonoBehaviour
         lowestDb = Mathf.Min(Samples_1);
         highestDb = Mathf.Max(Samples_1);
 
+        if(soundPlaying)
+            ShoutTimer += Time.deltaTime;
 
-        charAnimator.SetBool("SCREAMING", Average > -4);
-        Debug.Log(Average > -4);
+
+        if (ShoutTimer > MaxShoutTime)
+            soundPlaying = false;
+
+        if (Average > -4)
+        {
+            //ShoutTimer = 0.0f;
+            charAnimator.SetBool("SCREAMING", true);
+            shouting = true;
+            if (!soundPlaying)
+            {
+                ShoutTimer = 0.0f;
+                Debug.Log((int)UnityEngine.Random.Range(0.0f, 4.0f));
+                ShoutEffectPlayer.GetComponent<AudioSource>().clip = Shouts[(int)UnityEngine.Random.Range(0.0f, 4.0f)];
+                ShoutEffectPlayer.GetComponent<AudioSource>().loop = false;
+                ShoutEffectPlayer.GetComponent<AudioSource>().Play();
+                soundPlaying = true;
+            }
+        } else
+        {
+            
+            charAnimator.SetBool("SCREAMING", false);
+
+            shouting = false;
+        }
+        
+        //Debug.Log(Average > -4);
 //            Debug.Log("Average: " + Average + " lowest: " + lowestDb + " higest: " + highestDb);
 
 
@@ -207,26 +259,11 @@ public class AudioInput : MonoBehaviour
         if (Average > highestDb)
         {
             Average = highestDb;
-            // Fire a projectile if its not on cooldown
+            
 
-            if (!projectileCooldown)
-            {
-                (Instantiate(missile,
-                        this.transform.position + (OtherPlayer.transform.position - OtherPlayer.transform.position)
-                        .normalized * 5, Quaternion.identity) as GameObject).GetComponent<missile>()
-                    .direction(fireDir, OtherPlayer.transform.position, GetColorTemp());
-                projectileCooldown = true;
-            }
-            else
-            {
-                protimer += Time.fixedDeltaTime;
-            }
-
-            Debug.Log(protimer);
         }
 
         //highestDb - lowestDb;
-        float DBMax = 0.0f;
         DecibelMeter.fillAmount = (Average + Mathf.Abs(lowestDb)) / (Mathf.Abs(highestDb) + Mathf.Abs(lowestDb));
 
         fireVector = new Vector3(Mathf.Cos(Average * K), Mathf.Sin(Average * K));
