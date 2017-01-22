@@ -113,8 +113,13 @@ public class movement : MonoBehaviour
         }
         if (Mathf.Abs(horizontal) > 0.05f)
         {
+            if (!jump)
+            {
+                charAnimatior.SetBool("Moving", true);
+            }
             if (horizontal > 0)
             {
+                
                 Vector3 s = transform.localScale;
                 s.x = -Mathf.Abs(s.x);
                 transform.localScale = s;
@@ -125,7 +130,11 @@ public class movement : MonoBehaviour
                 s.x = Mathf.Abs(s.x);
                 transform.localScale = s;
             }
+        } else
+        {
+            charAnimatior.SetBool("Moving", false);
         }
+
         if (Input.GetButtonDown(playerJump))
         {
             
@@ -147,12 +156,10 @@ public class movement : MonoBehaviour
         if (body.velocity.y > 1)
         {
             charAnimatior.SetBool("InAir", jump);
-            charAnimatior.SetBool("OnGround", false);
         }
         else
         {
             charAnimatior.SetBool("InAir", jump);
-            charAnimatior.SetBool("OnGround", true);
         }
 
         body.AddForce(force);

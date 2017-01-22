@@ -1,0 +1,374 @@
+fileFormatVersion: 2
+guid: 43619e59093e85047910f26123715221
+timeCreated: 1485084758
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: ScreamoDudeRig:BS_Teeth
+    100004: ScreamoDudeRig:Character
+    100006: ScreamoDudeRig:DinosNew7:GEO_GRP
+    100008: ScreamoDudeRig:DinosNew7:pCube71
+    100010: ScreamoDudeRig:DinosNew7:pCube72
+    100012: ScreamoDudeRig:DinosNew7:Space_CNTRL
+    100014: ScreamoDudeRig:Extra
+    100016: ScreamoDudeRig:Flexi_Surface:flexi_anim_a01
+    100018: ScreamoDudeRig:Flexi_Surface:flexi_anim_b01
+    100020: ScreamoDudeRig:Flexi_Surface:flexi_anim_c01
+    100022: ScreamoDudeRig:Flexi_Surface:flexi_anim_d01
+    100024: ScreamoDudeRig:Flexi_Surface:flexi_anim_e01
+    100026: ScreamoDudeRig:Flexi_Surface:flexi_anim_end01
+    100028: ScreamoDudeRig:Flexi_Surface:flexi_anim_mid01
+    100030: ScreamoDudeRig:Flexi_Surface:flexi_anim_start01
+    100032: ScreamoDudeRig:Flexi_Surface:flexi_bind_a01
+    100034: ScreamoDudeRig:Flexi_Surface:flexi_bind_b01
+    100036: ScreamoDudeRig:Flexi_Surface:flexi_bind_c01
+    100038: ScreamoDudeRig:Flexi_Surface:flexi_bind_d01
+    100040: ScreamoDudeRig:Flexi_Surface:flexi_bind_e01
+    100042: ScreamoDudeRig:Flexi_Surface:flexi_end01_GRP
+    100044: ScreamoDudeRig:Flexi_Surface:flexi_flc_a01
+    100046: ScreamoDudeRig:Flexi_Surface:flexi_flc_b01
+    100048: ScreamoDudeRig:Flexi_Surface:flexi_flc_c01
+    100050: ScreamoDudeRig:Flexi_Surface:flexi_flc_d01
+    100052: ScreamoDudeRig:Flexi_Surface:flexi_flc_e01
+    100054: ScreamoDudeRig:Flexi_Surface:flexi_flcS01
+    100056: ScreamoDudeRig:Flexi_Surface:flexi_global01
+    100058: ScreamoDudeRig:Flexi_Surface:flexi_hidden01
+    100060: ScreamoDudeRig:Flexi_Surface:flexi_JNT_cWire01
+    100062: ScreamoDudeRig:Flexi_Surface:flexi_JNT_end01
+    100064: ScreamoDudeRig:Flexi_Surface:flexi_JNT_end01_GRP
+    100066: ScreamoDudeRig:Flexi_Surface:flexi_JNT_mid01
+    100068: ScreamoDudeRig:Flexi_Surface:flexi_JNT_mid01_GRP
+    100070: ScreamoDudeRig:Flexi_Surface:flexi_JNT_start01
+    100072: ScreamoDudeRig:Flexi_Surface:flexi_JNT_start01_GRP
+    100074: ScreamoDudeRig:Flexi_Surface:flexi_mid01_GRP
+    100076: ScreamoDudeRig:Flexi_Surface:flexi_start01_GRP
+    100078: ScreamoDudeRig:Flexi_Surface:flexiSpline01
+    100080: ScreamoDudeRig:GEO_GRP
+    100082: ScreamoDudeRig:joint1
+    100084: ScreamoDudeRig:joint10
+    100086: ScreamoDudeRig:joint11
+    100088: ScreamoDudeRig:joint12
+    100090: ScreamoDudeRig:joint16
+    100092: ScreamoDudeRig:joint17
+    100094: ScreamoDudeRig:joint18
+    100096: ScreamoDudeRig:joint18 1
+    100098: ScreamoDudeRig:joint19
+    100100: ScreamoDudeRig:joint19 1
+    100102: ScreamoDudeRig:joint2
+    100104: ScreamoDudeRig:joint2 1
+    100106: ScreamoDudeRig:joint20
+    100108: ScreamoDudeRig:joint21
+    100110: ScreamoDudeRig:joint25
+    100112: ScreamoDudeRig:joint26
+    100114: ScreamoDudeRig:joint3
+    100116: ScreamoDudeRig:joint3 1
+    100118: ScreamoDudeRig:joint5
+    100120: ScreamoDudeRig:joint6
+    100122: ScreamoDudeRig:joint7
+    100124: ScreamoDudeRig:joint8
+    100126: ScreamoDudeRig:joint9
+    100128: ScreamoDudeRig:Rig
+    100130: ScreamoDudeRig:Skeleton_Root
+    400000: //RootNode
+    400002: ScreamoDudeRig:BS_Teeth
+    400004: ScreamoDudeRig:Character
+    400006: ScreamoDudeRig:DinosNew7:GEO_GRP
+    400008: ScreamoDudeRig:DinosNew7:pCube71
+    400010: ScreamoDudeRig:DinosNew7:pCube72
+    400012: ScreamoDudeRig:DinosNew7:Space_CNTRL
+    400014: ScreamoDudeRig:Extra
+    400016: ScreamoDudeRig:Flexi_Surface:flexi_anim_a01
+    400018: ScreamoDudeRig:Flexi_Surface:flexi_anim_b01
+    400020: ScreamoDudeRig:Flexi_Surface:flexi_anim_c01
+    400022: ScreamoDudeRig:Flexi_Surface:flexi_anim_d01
+    400024: ScreamoDudeRig:Flexi_Surface:flexi_anim_e01
+    400026: ScreamoDudeRig:Flexi_Surface:flexi_anim_end01
+    400028: ScreamoDudeRig:Flexi_Surface:flexi_anim_mid01
+    400030: ScreamoDudeRig:Flexi_Surface:flexi_anim_start01
+    400032: ScreamoDudeRig:Flexi_Surface:flexi_bind_a01
+    400034: ScreamoDudeRig:Flexi_Surface:flexi_bind_b01
+    400036: ScreamoDudeRig:Flexi_Surface:flexi_bind_c01
+    400038: ScreamoDudeRig:Flexi_Surface:flexi_bind_d01
+    400040: ScreamoDudeRig:Flexi_Surface:flexi_bind_e01
+    400042: ScreamoDudeRig:Flexi_Surface:flexi_end01_GRP
+    400044: ScreamoDudeRig:Flexi_Surface:flexi_flc_a01
+    400046: ScreamoDudeRig:Flexi_Surface:flexi_flc_b01
+    400048: ScreamoDudeRig:Flexi_Surface:flexi_flc_c01
+    400050: ScreamoDudeRig:Flexi_Surface:flexi_flc_d01
+    400052: ScreamoDudeRig:Flexi_Surface:flexi_flc_e01
+    400054: ScreamoDudeRig:Flexi_Surface:flexi_flcS01
+    400056: ScreamoDudeRig:Flexi_Surface:flexi_global01
+    400058: ScreamoDudeRig:Flexi_Surface:flexi_hidden01
+    400060: ScreamoDudeRig:Flexi_Surface:flexi_JNT_cWire01
+    400062: ScreamoDudeRig:Flexi_Surface:flexi_JNT_end01
+    400064: ScreamoDudeRig:Flexi_Surface:flexi_JNT_end01_GRP
+    400066: ScreamoDudeRig:Flexi_Surface:flexi_JNT_mid01
+    400068: ScreamoDudeRig:Flexi_Surface:flexi_JNT_mid01_GRP
+    400070: ScreamoDudeRig:Flexi_Surface:flexi_JNT_start01
+    400072: ScreamoDudeRig:Flexi_Surface:flexi_JNT_start01_GRP
+    400074: ScreamoDudeRig:Flexi_Surface:flexi_mid01_GRP
+    400076: ScreamoDudeRig:Flexi_Surface:flexi_start01_GRP
+    400078: ScreamoDudeRig:Flexi_Surface:flexiSpline01
+    400080: ScreamoDudeRig:GEO_GRP
+    400082: ScreamoDudeRig:joint1
+    400084: ScreamoDudeRig:joint10
+    400086: ScreamoDudeRig:joint11
+    400088: ScreamoDudeRig:joint12
+    400090: ScreamoDudeRig:joint16
+    400092: ScreamoDudeRig:joint17
+    400094: ScreamoDudeRig:joint18
+    400096: ScreamoDudeRig:joint18 1
+    400098: ScreamoDudeRig:joint19
+    400100: ScreamoDudeRig:joint19 1
+    400102: ScreamoDudeRig:joint2
+    400104: ScreamoDudeRig:joint2 1
+    400106: ScreamoDudeRig:joint20
+    400108: ScreamoDudeRig:joint21
+    400110: ScreamoDudeRig:joint25
+    400112: ScreamoDudeRig:joint26
+    400114: ScreamoDudeRig:joint3
+    400116: ScreamoDudeRig:joint3 1
+    400118: ScreamoDudeRig:joint5
+    400120: ScreamoDudeRig:joint6
+    400122: ScreamoDudeRig:joint7
+    400124: ScreamoDudeRig:joint8
+    400126: ScreamoDudeRig:joint9
+    400128: ScreamoDudeRig:Rig
+    400130: ScreamoDudeRig:Skeleton_Root
+    4300000: ScreamoDudeRig:DinosNew7:pCube71
+    4300002: ScreamoDudeRig:DinosNew7:pCube72
+    7400000: RunDino
+    9500000: //RootNode
+    13700000: ScreamoDudeRig:DinosNew7:pCube71
+    13700002: ScreamoDudeRig:DinosNew7:pCube72
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: RunDino
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 12
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: ScreamoDudeRig:BS_Teeth
+        weight: 1
+      - path: ScreamoDudeRig:Character
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint1
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint1/ScreamoDudeRig:joint2
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint1/ScreamoDudeRig:joint2/ScreamoDudeRig:joint3
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint5
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint5/ScreamoDudeRig:joint6
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint5/ScreamoDudeRig:joint6/ScreamoDudeRig:joint7
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint5/ScreamoDudeRig:joint6/ScreamoDudeRig:joint7/ScreamoDudeRig:joint8
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint9
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint9/ScreamoDudeRig:joint10
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint9/ScreamoDudeRig:joint10/ScreamoDudeRig:joint11
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint9/ScreamoDudeRig:joint10/ScreamoDudeRig:joint11/ScreamoDudeRig:joint12
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint9/ScreamoDudeRig:joint10/ScreamoDudeRig:joint17
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint9/ScreamoDudeRig:joint10/ScreamoDudeRig:joint17/ScreamoDudeRig:joint18
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint9/ScreamoDudeRig:joint10/ScreamoDudeRig:joint17/ScreamoDudeRig:joint18/ScreamoDudeRig:joint19
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint9/ScreamoDudeRig:joint10/ScreamoDudeRig:joint20
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint9/ScreamoDudeRig:joint10/ScreamoDudeRig:joint21
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint9/ScreamoDudeRig:joint10/ScreamoDudeRig:joint25
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint9/ScreamoDudeRig:joint10/ScreamoDudeRig:joint25/ScreamoDudeRig:joint18
+          1
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint9/ScreamoDudeRig:joint10/ScreamoDudeRig:joint25/ScreamoDudeRig:joint18
+          1/ScreamoDudeRig:joint19 1
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint16
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint16/ScreamoDudeRig:joint2
+          1
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint16/ScreamoDudeRig:joint2
+          1/ScreamoDudeRig:joint3 1
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:DinosNew7:Space_CNTRL/ScreamoDudeRig:Rig/ScreamoDudeRig:Skeleton_Root/ScreamoDudeRig:joint16/ScreamoDudeRig:joint2
+          1/ScreamoDudeRig:joint26
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_flcS01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_flcS01/ScreamoDudeRig:Flexi_Surface:flexi_flc_a01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_flcS01/ScreamoDudeRig:Flexi_Surface:flexi_flc_a01/ScreamoDudeRig:Flexi_Surface:flexi_anim_a01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_flcS01/ScreamoDudeRig:Flexi_Surface:flexi_flc_a01/ScreamoDudeRig:Flexi_Surface:flexi_anim_a01/ScreamoDudeRig:Flexi_Surface:flexi_bind_a01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_flcS01/ScreamoDudeRig:Flexi_Surface:flexi_flc_b01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_flcS01/ScreamoDudeRig:Flexi_Surface:flexi_flc_b01/ScreamoDudeRig:Flexi_Surface:flexi_anim_b01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_flcS01/ScreamoDudeRig:Flexi_Surface:flexi_flc_b01/ScreamoDudeRig:Flexi_Surface:flexi_anim_b01/ScreamoDudeRig:Flexi_Surface:flexi_bind_b01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_flcS01/ScreamoDudeRig:Flexi_Surface:flexi_flc_c01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_flcS01/ScreamoDudeRig:Flexi_Surface:flexi_flc_c01/ScreamoDudeRig:Flexi_Surface:flexi_anim_c01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_flcS01/ScreamoDudeRig:Flexi_Surface:flexi_flc_c01/ScreamoDudeRig:Flexi_Surface:flexi_anim_c01/ScreamoDudeRig:Flexi_Surface:flexi_bind_c01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_flcS01/ScreamoDudeRig:Flexi_Surface:flexi_flc_d01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_flcS01/ScreamoDudeRig:Flexi_Surface:flexi_flc_d01/ScreamoDudeRig:Flexi_Surface:flexi_anim_d01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_flcS01/ScreamoDudeRig:Flexi_Surface:flexi_flc_d01/ScreamoDudeRig:Flexi_Surface:flexi_anim_d01/ScreamoDudeRig:Flexi_Surface:flexi_bind_d01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_flcS01/ScreamoDudeRig:Flexi_Surface:flexi_flc_e01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_flcS01/ScreamoDudeRig:Flexi_Surface:flexi_flc_e01/ScreamoDudeRig:Flexi_Surface:flexi_anim_e01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_flcS01/ScreamoDudeRig:Flexi_Surface:flexi_flc_e01/ScreamoDudeRig:Flexi_Surface:flexi_anim_e01/ScreamoDudeRig:Flexi_Surface:flexi_bind_e01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_global01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_global01/ScreamoDudeRig:Flexi_Surface:flexi_end01_GRP
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_global01/ScreamoDudeRig:Flexi_Surface:flexi_end01_GRP/ScreamoDudeRig:Flexi_Surface:flexi_anim_end01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_global01/ScreamoDudeRig:Flexi_Surface:flexi_mid01_GRP
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_global01/ScreamoDudeRig:Flexi_Surface:flexi_mid01_GRP/ScreamoDudeRig:Flexi_Surface:flexi_anim_mid01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_global01/ScreamoDudeRig:Flexi_Surface:flexi_start01_GRP
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_global01/ScreamoDudeRig:Flexi_Surface:flexi_start01_GRP/ScreamoDudeRig:Flexi_Surface:flexi_anim_start01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_hidden01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_hidden01/ScreamoDudeRig:Flexi_Surface:flexi_JNT_cWire01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_hidden01/ScreamoDudeRig:Flexi_Surface:flexi_JNT_cWire01/ScreamoDudeRig:Flexi_Surface:flexi_JNT_end01_GRP
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_hidden01/ScreamoDudeRig:Flexi_Surface:flexi_JNT_cWire01/ScreamoDudeRig:Flexi_Surface:flexi_JNT_end01_GRP/ScreamoDudeRig:Flexi_Surface:flexi_JNT_end01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_hidden01/ScreamoDudeRig:Flexi_Surface:flexi_JNT_cWire01/ScreamoDudeRig:Flexi_Surface:flexi_JNT_mid01_GRP
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_hidden01/ScreamoDudeRig:Flexi_Surface:flexi_JNT_cWire01/ScreamoDudeRig:Flexi_Surface:flexi_JNT_mid01_GRP/ScreamoDudeRig:Flexi_Surface:flexi_JNT_mid01
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_hidden01/ScreamoDudeRig:Flexi_Surface:flexi_JNT_cWire01/ScreamoDudeRig:Flexi_Surface:flexi_JNT_start01_GRP
+        weight: 1
+      - path: ScreamoDudeRig:Character/ScreamoDudeRig:Extra/ScreamoDudeRig:Flexi_Surface:flexiSpline01/ScreamoDudeRig:Flexi_Surface:flexi_hidden01/ScreamoDudeRig:Flexi_Surface:flexi_JNT_cWire01/ScreamoDudeRig:Flexi_Surface:flexi_JNT_start01_GRP/ScreamoDudeRig:Flexi_Surface:flexi_JNT_start01
+        weight: 1
+      - path: ScreamoDudeRig:DinosNew7:GEO_GRP
+        weight: 1
+      - path: ScreamoDudeRig:DinosNew7:GEO_GRP/ScreamoDudeRig:DinosNew7:pCube71
+        weight: 1
+      - path: ScreamoDudeRig:DinosNew7:GEO_GRP/ScreamoDudeRig:DinosNew7:pCube72
+        weight: 1
+      - path: ScreamoDudeRig:GEO_GRP
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

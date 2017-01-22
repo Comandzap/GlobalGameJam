@@ -226,7 +226,7 @@ public class AudioInput : MonoBehaviour
         if (ShoutTimer > MaxShoutTime)
             soundPlaying = false;
 
-        if (Average > -4)
+        if (Average > 8)
         {
             //ShoutTimer = 0.0f;
             charAnimator.SetBool("SCREAMING", true);
