@@ -20,17 +20,21 @@ public class Meny : MonoBehaviour {
 
 	public Transform players;
 	AudioSource backgrundsound;
+    public AudioClip clip;
 
 	// Use this for initialization
 	void Start ()
 	{
 		backgrundsound = GetComponent<AudioSource>();
+        backgrundsound.clip = clip;
+        backgrundsound.Play();
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
 		startuptime += Time.deltaTime;
+        Debug.Log(startuptime);
 		//fadetoblack.color = new Color(1, 1, 1, startuptime);
 		if (startuptime < 1)
 		{
@@ -45,10 +49,10 @@ public class Meny : MonoBehaviour {
 		{
 			Firmalogo.color = new Color(1, 1, 1, 0);
 		}
-		else if (startuptime > 4)
+		else if (startuptime > 4.0f)
 		{
-			backgrundsound.Play();
-			players.position = new Vector3(0, 0, 0);
+            backgrundsound.volume = 1.0f;
+            players.position = new Vector3(0, 0, 0);
 			fadetoblack.color = new Color(1, 1, 1, 6 - startuptime);
 		}
 
